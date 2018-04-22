@@ -182,10 +182,12 @@ end
 -- Also checks the size of the area and if the user already
 -- has more than max_areas.
 function areas:canPlayerAddArea(pos1, pos2, name)
-	local privs = minetest.get_player_privs(name)
-	if privs.areas then
+
+	if minetest.check_player_privs(name, self.adminPrivs) then
 		return true
 	end
+
+	local privs = minetest.get_player_privs(name)
 
 	-- Check self protection privilege, if it is enabled,
 	-- and if the area is too big.
